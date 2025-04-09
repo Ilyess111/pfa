@@ -13,14 +13,14 @@
             <button type="submit">logout</button>
         </form>
         <p>wanna change passowrd ? </p>
-        <a href="accounts/password_change">change my passowrd</a>
+        <a href="{% url 'password_change' %}">change my passowrd</a>
         {% else %}
         <p>sign up</p>
         <a href=" {% url 'signup' %}">sign up</a>
         <p>you are not logged in </p>
         <a href="{% url 'login' %}">Log in</a>
         <p>forgot your password ? </p>
-        <a href="{% url 'password-reset' %}">Reset Password</a>
+        <a href="{% url 'password_reset' %}">Reset Password</a>
         
         {% endif %}
         <div>
