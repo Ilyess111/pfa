@@ -1,0 +1,29 @@
+
+
+{% block content %}
+<h1>Search Offers</h1>
+
+<form method="get">
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+{% if offers %}
+    <h2>Results</h2>
+    <ul>
+    {% for offer in offers %}
+        <li>
+            <h3>{{ offer.title }}</h3>
+            <p>Destination: {{ offer.destination }}</p>
+            <p>Duration: {{ offer.duration }} days</p>
+            <p>Price: ${{ offer.price }}</p>
+            <p>Available from {{ offer.available_from }} to {{ offer.available_to }}</p>
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    {% if request.GET %}
+        <p>No offers match your search criteria.</p>
+    {% endif %}
+{% endif %}
+{% endblock %}

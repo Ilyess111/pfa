@@ -1,0 +1,302 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Nunito', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
+    background-image: url("background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.login-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.512);
+    text-align: center;
+    margin: 50px;
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-container {
+    margin-bottom: 20px;
+}
+
+.logo {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 5px;
+}
+
+.agency-name {
+    font-size: 24px;
+    color: #0056b3;
+    margin: 0;
+    
+}
+
+
+h2 {
+    font-family: 'Montserrat', 'Arial', sans-serif;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #2c3e50;
+    font-size: 24px;
+    letter-spacing: -0.5px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 3px;
+    background: linear-gradient(90deg, #3498db, #2c3e50);
+    border-radius: 3px;
+}
+
+
+
+
+.login-form {
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input {
+    width: 120%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+
+
+.login-btn {
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 130%;
+    transition: background-color 0.3s;
+}
+
+.login-btn:hover {
+    background-color: #0056b3;
+}
+
+.social-login {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.social-login p {
+    font-size: 15px;
+    color: #5555557e;
+    margin-left: 65px;
+    position: relative;
+    display: inline-block;
+}
+
+
+.social-login p::before,
+.social-login p::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 100px;
+    height: 2px;
+    background-color: #ccccccd7;
+}
+
+.social-login p::before {
+    left: -110px;
+}
+
+.social-login p::after {
+    right: -110px;
+}
+
+.social {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 90%;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+    margin-bottom: 12px;
+    background-color: #fff;
+    color: #333;
+    text-decoration: none;
+    
+}
+
+.social:hover {
+    
+        background-color: #f0f0f0;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    
+}
+
+.social-login a{
+    text-decoration: none;
+}
+
+.social img {
+    margin-right: 10px;
+    width: 25px;
+    height: 25px;
+}
+
+.social.google {
+    border-color: #17161665;
+    color: #db4437;
+    width: 112%;
+}
+
+.social.google:hover {
+    opacity: 0.9;
+}
+
+.social.facebook {
+    border-color: #17161665;
+    color: #3b5998;
+    width: 112%;
+}
+
+.social.facebook:hover {
+    opacity: 0.9;
+}
+
+.create-account {
+    font-size: 14px;
+}
+
+.create-account a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+.create-account a:hover {
+    text-decoration: underline;
+}
+
+.image-container {
+    flex: 1;
+    
+    position: relative;
+    width: 850px;
+    height: 600px;
+    overflow: hidden;
+    border-radius: 15px;
+}
+
+
+.slider {
+    width: 0%;
+    height: 100%;
+}
+
+.slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+/* Slider Indicators */
+.slider-indicators {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Active indicator (elongated oval) */
+.indicator {
+    width: 12px;
+    height: 12px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    transition: width 0.3s, background-color 0.3s;
+}
+
+.indicator.active {
+    width: 28px;
+    height: 12px;
+    background-color: white;
+    border-radius: 20px;
+}
+
+
+
+.log{
+    padding-right: 200px;
+}
+
+
+.image-container {
+    position: relative; /* Permet de positionner le texte par rapport à l’image */
+    display: inline-block;
+}
+
+.image-text {
+    position: absolute; /* Positionne le texte sur l’image */
+    top: 10%; /* Centre verticalement */
+    left: 20%; /* Centre horizontalement */
+    transform: translate(-50%, -50%); /* Ajuste le centrage */
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+    width: 32%;
+}
+

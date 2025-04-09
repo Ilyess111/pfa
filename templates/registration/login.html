@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'pfa/style/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>Travel Agency Login</title>
+</head>
+<body>
+      <style>
+        body{
+            background-image: url("{% static 'pfa/images/background.jpg' %}");
+        }
+      </style>
+    
+    <section class="login-section" id="Login">
+        <article class="container">
+            <div class="log">
+                <div class="logo-container">
+                    <img src="{% static 'pfa/images/air.jpg' %}" alt="Airplane Logo" class="logo">
+                    <h1 class="agency-name">TRAVEL AGENCY</h1>
+                </div>
+                <h2>Login</h2>
+
+                <form class="login-form" action="" method="post">
+                    {% csrf_token %}
+
+                    
+                    <div class="form-group">
+                        {{ form.username.label_tag }}
+                        {{ form.username }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.password.label_tag }}
+                        {{ form.password }}
+                    </div>
+                    <button type="submit" class="login-btn">LOGIN</button>
+                    
+                </form>
+                <div class="social-login">
+                    <p>Or sign up with</p>
+                    <div class="social google">
+                        <img src="{% static 'pfa/images/Google-Phone-logo.webp' %}" alt="Google Logo">
+                        <a href="#">Google</a>
+                    </div>
+                    <div class="social facebook">
+                        <img src="{% static 'pfa/images/Facebook.png' %}" alt="Facebook Logo">
+                        <a href="#">Facebook</a>
+                    </div>
+                </div>
+                <div class="create-account">
+                    <p>Not registered yet? <a href="{% url 'signup' %}">Create an Account</a></p>
+                </div>
+                <div class="create-account">
+                    <a href="{% url 'password-reset' %}">Forgot you password?</a>
+                </div>
+            </div>
+            <div class="image-container">
+                <div class="slider">
+                    <img src="{% static 'pfa/images/image1.jpg' %} " class="slide active" alt="Travel Image">
+                    <img src="{% static 'pfa/images/freepik__upload__52742.png' %} " class="slide" alt="Travel Image">
+                    <img src="{% static 'pfa/images/freepik__upload__64877.png' %} " class="slide" alt="Travel Image">
+                </div>
+                <div class="slider-indicators">
+                    <span class="indicator active"></span>
+                    <span class="indicator"></span>
+                    <span class="indicator"></span>
+                </div>
+                
+                <div class="image-text">Start your journey by one click, explore the beautiful world!</div>
+            </div>
+        </article>
+    </section>
+    <script src="{% static 'pfa/javascript/script.js' %}"></script>
+
+    
+</body>
+</html>
