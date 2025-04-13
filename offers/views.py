@@ -1,5 +1,6 @@
-from django.views.generic import ListView , DetailView
-from .models import Offer
+from django.views.generic import ListView , DetailView , CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
+from .models import Offer , Review
 
 class OffersListView(ListView):
     model = Offer
@@ -8,6 +9,7 @@ class OffersListView(ListView):
 class OfferDetailView(DetailView): # new
     model = Offer
     template_name = 'offers_templates/offer_detail.html'
+    pk_url_kwarg = 'offer_id'
     
 ########
 
@@ -51,3 +53,45 @@ def offer_search(request):
         'offers': offers,
     }
     return render(request, 'offers_templates/offer_search.html', context)
+
+# reviews related views
+class ReviewsListView(ListView):
+    model=Review
+    template_name="offers_templates/offer_detail.html"
+    context_object_name = 'all_reviews'
+
+#not used yet 
+class ReviewDetailView(DetailView):
+    model = Review
+    template_name = "reviews_templates/review_detail.html"
+    pk_url_kwarg = 'review_id'
+
+
+
+class ReviewCreateView(CreateView):
+    model = Review
+    fields='__all__'
+    template_name = "reviews_templates/review_form.html"
+
+    def get_success_url(self):
+        return reverse_lazy('review_detail', kwargs={'pk': self.object.pk})
+
+class ReviewUpdateView( UpdateView):
+    model = Review
+    fields=['title','comment','rating']
+    template_name = "reviews_templates/review_form.html"
+    pk_url_kwarg = 'review_id'
+
+
+    def get_success_url(self):
+        return reverse_lazy('review_detail', kwargs={'pk': self.object.pk})
+
+
+class ReviewDeleteView( DeleteView):
+    model = Review
+    template_name = "reviews_templates/review_confirm_delete.html"
+    pk_url_kwarg = 'review_id'
+
+    def get_success_url(self):
+        return reverse_lazy('offers_list')
+

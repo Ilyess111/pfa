@@ -25,6 +25,6 @@ urlpatterns = [
     path('accounts/',include('users.urls')),
     path('offers/',include('offers.urls')),
     path('bookings/',include('bookings.urls')),
-    path('reviews/',include('reviews.urls')),
+    
     
 ]

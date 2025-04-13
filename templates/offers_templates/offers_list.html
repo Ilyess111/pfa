@@ -14,17 +14,21 @@
 <h1>{{offer.available_to}}</h1>
 <h1>{{offer.max_people}}</h1>
 <h1>{{offer.created_at}}</h1>
+<!-- for test -->
 <p>{{ offer.image.url }}</p>
 <img src="{{ offer.image.url }}" alt="Offer Image">
+<a href="{% url 'review_create' offer.pk %}">add review</a>
+<h3>reviews : </h3>
 {% for review in offer.reviews.all %} 
 <div>
-    <p>{{review.author}}</p>
-    <p>{{review.title}}</p>
+    <h5>{{review.title}}</h5>
+    <p>author: {{review.author}}</p>
+    <p>rating: {{review.rating}}</p>
+    <p>{{review.created_at}}</p>
     <p>{{review.comment}}</p>
     <hr>
 </div>
 {%endfor%}
-
-
+<hr>
 {% endfor %}
 {% endblock content %}
