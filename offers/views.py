@@ -58,7 +58,7 @@ def offer_search(request):
 class ReviewsListView(ListView):
     model=Review
     template_name="offers_templates/offer_detail.html"
-    context_object_name = 'all_reviews'
+    # context_object_name = 'all_reviews'
 
 #not used yet 
 class ReviewDetailView(DetailView):

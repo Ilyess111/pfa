@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
 <h1>this is where to show offers (homepage)</h1>
  <a href="{% url 'offer_search' %}" >
@@ -16,7 +17,8 @@
 <h1>{{offer.created_at}}</h1>
 <!-- for test -->
 <p>{{ offer.image.url }}</p>
-<img src="{{ offer.image.url }}" alt="Offer Image">
+<img src="{% static offer.image %}" >
+
 <a href="{% url 'review_create' offer.pk %}">add review</a>
 <h3>reviews : </h3>
 {% for review in offer.reviews.all %} 
