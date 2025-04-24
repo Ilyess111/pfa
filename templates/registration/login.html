@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="{% static 'pfa/style/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static '/style/style.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <title>Travel Agency Login</title>
 </head>
 <body>
       <style>
         body{
-            background-image: url("{% static 'pfa/images/background.jpg' %}");
+            background-image: url("{% static '/images/background.jpg' %}");
         }
       </style>
     
@@ -19,7 +19,7 @@
         <article class="container">
             <div class="log">
                 <div class="logo-container">
-                    <img src="{% static 'pfa/images/air.jpg' %}" alt="Airplane Logo" class="logo">
+                    <img src="{% static '/images/air.jpg' %}" alt="Airplane Logo" class="logo">
                     <h1 class="agency-name">TRAVEL AGENCY</h1>
                 </div>
                 <h2>Login</h2>
@@ -42,11 +42,11 @@
                 <div class="social-login">
                     <p>Or sign up with</p>
                     <div class="social google">
-                        <img src="{% static 'pfa/images/Google-Phone-logo.webp' %}" alt="Google Logo">
+                        <img src="{% static '/images/Google-Phone-logo.webp' %}" alt="Google Logo">
                         <a href="#">Google</a>
                     </div>
                     <div class="social facebook">
-                        <img src="{% static 'pfa/images/Facebook.png' %}" alt="Facebook Logo">
+                        <img src="{% static '/images/Facebook.png' %}" alt="Facebook Logo">
                         <a href="#">Facebook</a>
                     </div>
                 </div>
@@ -59,9 +59,9 @@
             </div>
             <div class="image-container">
                 <div class="slider">
-                    <img src="{% static 'pfa/images/image1.jpg' %} " class="slide active" alt="Travel Image">
-                    <img src="{% static 'pfa/images/freepik__upload__52742.png' %} " class="slide" alt="Travel Image">
-                    <img src="{% static 'pfa/images/freepik__upload__64877.png' %} " class="slide" alt="Travel Image">
+                    <img src="{% static '/images/image1.jpg' %} " class="slide active" alt="Travel Image">
+                    <img src="{% static '/images/freepik__upload__52742.png' %} " class="slide" alt="Travel Image">
+                    <img src="{% static '/images/freepik__upload__64877.png' %} " class="slide" alt="Travel Image">
                 </div>
                 <div class="slider-indicators">
                     <span class="indicator active"></span>
@@ -73,7 +73,7 @@
             </div>
         </article>
     </section>
-    <script src="{% static 'pfa/javascript/script.js' %}"></script>
+    <script src="{% static '/javascript/script.js' %}"></script>
 
     
 </body>

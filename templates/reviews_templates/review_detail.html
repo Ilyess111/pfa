@@ -1,5 +1,66 @@
-<h2>Review by {{ review.user.username }}</h2>
-<h1>{{review.title}}</h1>
-<p>Rating: ⭐{{ review.rating }}/5</p>
-<p>{{ review.comment }}</p>
-<p><small>Posted on {{ review.created_at }}</small></p>
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Details | TravelAir</title>
+    <link rel="stylesheet" href="{% static '/style/review_details.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="background-overlay"></div>
+
+    <section class="review-section" id="Review">
+        <article class="review-container">
+            <div class="review-content">
+                <div class="logo-container">
+                    <img src="{% static '/images/air.jpg' %}" alt="TravelAir Logo" class="logo">
+                    <div class="logo-glow"></div>
+                </div>
+                
+                <div class="review-header">
+                    <h2>Review by <span class="username">{{review.author}}</span></h2>
+                    <div class="rating-stars">
+                        {% for i in "12345" %}
+                            {% if forloop.counter <= review.rating %}
+                                <i class="fas fa-star filled"></i>
+                            {% else %}
+                                <i class="far fa-star"></i>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <h1 class="review-title">{{ review.title }}</h1>
+
+                <div class="review-body">
+                    <p class="review-comment">{{ review.comment }}</p>
+                </div>
+
+                <div class="review-meta">
+                    <p class="review-date"><i class="far fa-calendar-alt"></i> Posted on {{ review.created_at }}</p>
+                </div>
+
+                <div class="action-buttons">
+                    <a href="{% url 'offers_list' %}" class="btn btn-back">
+                        <i class="fas fa-arrow-left"></i> Back to offers
+                    </a>
+                    <button class="btn btn-like">
+                        <i class="far fa-heart"></i> Like this review
+                    </button>
+                </div>
+            </div>
+        </article>
+    </section>
+
+    <div class="floating-elements">
+        <div class="circle circle-1"></div>
+        <div class="circle circle-2"></div>
+        <div class="circle circle-3"></div>
+    </div>
+</body>
+</html>

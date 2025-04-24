@@ -31,7 +31,7 @@ def offer_search(request):
             offers = offers.filter(title__icontains=data['title'])
 
         if data.get('destination'):
-            offers = offers.filter(destination__iexacts=data['destination'])
+            offers = offers.filter(destination__iexact=data['destination'])
         
         if data.get('min_duration'):
             offers = offers.filter(duration__gte=data['min_duration'])
@@ -55,12 +55,13 @@ def offer_search(request):
     return render(request, 'offers_templates/offer_search.html', context)
 
 # reviews related views
+
 class ReviewsListView(ListView):
     model=Review
     template_name="offers_templates/offer_detail.html"
     # context_object_name = 'all_reviews'
 
-#not used yet 
+#maybe we'll remove it (not a good functionnality)
 class ReviewDetailView(DetailView):
     model = Review
     template_name = "reviews_templates/review_detail.html"
@@ -70,11 +71,18 @@ class ReviewDetailView(DetailView):
 
 class ReviewCreateView(CreateView):
     model = Review
-    fields='__all__'
+    fields=['title','comment','rating']
     template_name = "reviews_templates/review_form.html"
-
+    
+    def form_valid(self, form):
+        """Automatically set the author and offer before saving"""
+        form.instance.author = self.request.user
+        form.instance.offer_id = self.kwargs['offer_id'] #self.kwargs is a dictionary that contains URL pattern
+        return super().form_valid(form)
+    
     def get_success_url(self):
-        return reverse_lazy('review_detail', kwargs={'pk': self.object.pk})
+        """Redirect to offer detail page after successful submission"""
+        return reverse_lazy('offer_detail', kwargs={'offer_id': self.kwargs['offer_id']})
 
 class ReviewUpdateView( UpdateView):
     model = Review
@@ -84,7 +92,10 @@ class ReviewUpdateView( UpdateView):
 
 
     def get_success_url(self):
-        return reverse_lazy('review_detail', kwargs={'pk': self.object.pk})
+        return reverse_lazy('review_detail', kwargs={
+            'offer_id': self.object.offer.id,  
+            'review_id': self.object.id      
+        })
 
 
 class ReviewDeleteView( DeleteView):

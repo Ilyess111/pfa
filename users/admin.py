@@ -1,14 +1,14 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .forms import CutsomUserCreationForm , CustomUserChangeForm
+from .forms import CustomUserCreationForm , CustomUserChangeForm
 from .models import CustomUser
 
 class CustomUserAdmin(UserAdmin):
-    add_form=CutsomUserCreationForm
+    add_form=CustomUserCreationForm
     form=CustomUserChangeForm
     model=CustomUser
     #list_display for admin panel's table of users fields .
-    list_display=['username','email','is_staff']
+    list_display=['username','email','phone_number','date_of_birth']
     #fieldsets for edit , add_fieldsets for creation.
     fieldsets = (
         (None, {'fields': ('username', 'password')}),  
@@ -18,7 +18,7 @@ class CustomUserAdmin(UserAdmin):
     )
 
     add_fieldsets = (
-        (None, {'fields': ('username', 'email', 'password1', 'password2', 'date_of_birth', 'is_staff', 'is_active')}
+        (None, {'fields': ('username', 'password1', 'password2','email','phone_number','date_of_birth')}
         ),
     )
     

@@ -1,26 +1,86 @@
-{% load static %}
-<h1>{{offer.title}}</h1>
-<pre>
-{{offer.description}}
-{{offer.destination}}
-{{offer.price}}
-{{offer.duration}}
-{{offer.available_from}}
-{{offer.available_to}}
-{{offer.max_people}}
-{{offer.created_at}}
-</pre>
-<p>{{ offer.image.url }}</p>
-<img src="{% static offer.image %}" >
-<h3>reviews : </h3>
-{% for review in offer.reviews.all %} 
-<div>
-    <h5>{{review.title}}</h5>
-    <p>author: {{review.author}}</p>
-    <p>rating: {{review.rating}}</p>
-    <p>{{review.created_at}}</p>
-    <p>{{review.comment}}</p>
-    <hr>
-</div>
-{%endfor%}
 
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static '/style/liste_des_offre_detail.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <title>Offer Details</title>
+</head>
+<body>
+
+    <style>
+        body{
+            background-image: url("{% static '/images/background2.png' %}");
+        }
+    </style>
+
+    <section class="login-section" id="Login">
+        <article class="container">
+            <div class="log">
+                <div class="logo-container">
+                    <img src="{% static '/images/air.jpg' %}" alt="Company Logo">
+                </div>
+                
+                <div class="form-container">
+                    <h1 class="password-reset-title">Offer Details</h1>
+                    
+                    <form class="login-form" action="" method="post">
+                        {% csrf_token %}
+                        <h3>{{offer.title}}</h3>
+                        
+                        <img src="{% static offer.image %}" alt="Offer Image">
+                        
+                        <p>{{offer.description}}</p>
+                        <div>
+
+
+                        </div>
+                        
+                        <div class="offer-detail-grid">
+                            <div class="offer-detail-item">
+                                <strong>Destination:</strong> {{offer.destination}}
+                            </div>
+                            <div class="offer-detail-item">
+                                <strong>Price:</strong> ${{offer.price}}
+                            </div>
+                            <div class="offer-detail-item">
+                                <strong>Duration:</strong> {{offer.duration}} days
+                            </div>
+                            <div class="offer-detail-item">
+                                <strong>Available:</strong> {{offer.available_from}} to {{offer.available_to}}
+                            </div>
+                            <div class="offer-detail-item">
+                                <strong>Max People:</strong> {{offer.max_people}}
+                            </div>
+                            <div class="offer-detail-item">
+                                <strong>Posted:</strong> {{offer.created_at}}
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h3>reviews : </h3>
+                            {% for review in offer.reviews.all %} 
+                            <div>
+                                <p>author: {{review.author}}</p>
+                                <p>rating: {{review.rating}}</p>
+                                <p>{{review.created_at}}</p>
+                                <p>{{review.comment}}</p>
+                                <hr>
+                            </div>
+                            {%endfor%}
+                        </div>
+                        <div class="footer-link">
+                            <a href="{% url 'offers_list' %}">Back offer list</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </article>
+    </section>
+</body>
+</html>

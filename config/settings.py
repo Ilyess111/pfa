@@ -131,8 +131,8 @@ LOGOUT_REDIRECT_URL='offers_list'
 
 import os
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 AUTH_USER_MODEL='users.CustomUser'
 
@@ -140,12 +140,10 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 DEFAULT_FROM_EMAIL = 'karouii292@gmail.com'
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_HOST_USER = 'apikey'
-EMAIL_HOST_PASSWORD = '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'
+EMAIL_HOST_PASSWORD = str(os.getenv("EMAIL_HOST_PASSWORD"))
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-# settings.py
-import os
 
 STATIC_URL = '/static/'
 

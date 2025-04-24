@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="{% static 'pfa/style/account.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static '/style/account.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <title>Sign up</title>
 </head>
@@ -12,7 +12,7 @@
     
     <style>
         body{
-            background-image: url("{% static 'pfa/images/background.jpg' %}");
+            background-image: url("{% static '/images/background.jpg' %}");
         }
       </style>
 
@@ -21,13 +21,13 @@
         <article class="container">
             <div class="image-container">
                 
-                <img src="{% static 'pfa/images/adventure.jpg' %}" alt="Travel Image" class="travel-image">
+                <img src="{% static '/images/adventure.jpg' %}" alt="Travel Image" class="travel-image">
                 
             </div>
 
             <div class="log">
                 <div class="logo-container">
-                    <img src="{% static 'pfa/images/air.jpg' %}" alt="Airplane Logo" class="logo">
+                    <img src="{% static '/images/air.jpg' %}" alt="Airplane Logo" class="logo">
                     <h1 class="welcome">Welcome</h1>
                 </div>
                 <div>
@@ -37,12 +37,9 @@
                
             <form class="login-form" action="" method="post">
 
-               
-
-
                 {% csrf_token %}
                 
-                <div class="form-group">
+                <div class="form-group" >
                     {{ form.username.label_tag }}
                     {{ form.username }}
                 </div>
@@ -52,10 +49,26 @@
                     {{ form.password1.label_tag }}
                     {{ form.password1 }}
                 </div>
+
                 <div class="form-group">
                     {{ form.password2.label_tag }}
                     {{ form.password2 }}
                 </div>
+               <div class="form-group">
+                    {{ form.email.label_tag }}
+                    {{ form.email }}
+                </div> 
+
+                <div class="form-group">
+                    {{ form.phone_number.label_tag }}
+                    {{ form.phone_number }}
+                </div> 
+
+                <div class="form-group">
+                    {{ form.date_of_birth.label_tag }}
+                    {{ form.date_of_birth }}
+                </div>
+
                 <button type="submit" class="login-btn">SIGN UP</button>
                 <div>
                     <a href="{% url 'login' %}">Back</a>
