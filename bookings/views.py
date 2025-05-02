@@ -5,6 +5,7 @@ from offers.models import Offer
 from .forms import BookingForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
+from django.shortcuts import get_object_or_404
 
 
 class BookingCreateView(CreateView):
@@ -16,7 +17,13 @@ class BookingCreateView(CreateView):
     def form_valid(self, form):
         if not self.request.user.is_authenticated:
             raise PermissionDenied("You must be logged in to make a booking")
+
+        offer_id = self.kwargs.get("offer_id")
+        offer = get_object_or_404(Offer, id=offer_id)
+        
         form.instance.user = self.request.user
+        form.instance.offer = offer             
+
         return super().form_valid(form)
 
 class BookingListView(ListView):

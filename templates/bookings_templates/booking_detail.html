@@ -3,5 +3,5 @@
 <p>People: {{ booking.num_people }}</p>
 <p>Total Price: {{ booking.total_price }}</p>
 <p>Status: {{ booking.status }}</p>
-<a href="{%url 'booking_update' booking.pk %}">update booking</a>
-<a href="{%url 'booking_delete' booking.pk %}">delete booking</a>
+<a href="{%url 'booking_update' booking.offer_id booking.pk %}">update booking</a>
+<a href="{%url 'booking_delete' booking.offer_id booking.pk %}">delete booking</a>

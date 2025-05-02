@@ -3,7 +3,7 @@ from users.models import CustomUser
 from offers.models import Offer
 
 class Booking(models.Model):
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE,null=True,blank=True)  # The user who made the booking
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE,null=False)  # The user who made the booking
     offer = models.ForeignKey(Offer, on_delete=models.CASCADE)  # The travel package they booked
     num_people = models.IntegerField(default=1)  # Number of travelers
     start_date = models.DateField()  # Date when the trip starts

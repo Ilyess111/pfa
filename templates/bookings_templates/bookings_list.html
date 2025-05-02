@@ -1,3 +1,7 @@
+<!-- list of bookings which the current user have made  -->
+
 {% for booking in bookings %}
-   <a href="{% url 'booking_detail' booking.pk %}"><p>Offer: {{ booking.offer.title }} | Status: {{ booking.status }}</p></a> 
+   {% if booking.user == request.user %}
+   <a href="{% url 'booking_detail' booking.offer_id booking.pk %}"><p>Offer: {{ booking.offer.title }} | Status: {{ booking.status }}</p></a> 
+   {% endif %}
 {% endfor %}

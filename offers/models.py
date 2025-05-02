@@ -23,7 +23,7 @@ class Review(models.Model):
     title = models.CharField(max_length=255, blank=True, null=True)  # Optional title
     comment = models.CharField(max_length=140)
     rating = models.IntegerField(choices=[(i, i) for i in range(1, 6)])
-    author = models.ForeignKey(get_user_model(),on_delete=models.CASCADE,null=True,blank=True)
+    author = models.ForeignKey(get_user_model(),on_delete=models.CASCADE,null=False,blank=False)
     created_at = models.DateTimeField(auto_now_add=True)  # Timestamp when the review was created
     updated_at = models.DateTimeField(auto_now=True)  # Timestamp when the review was last modified
     

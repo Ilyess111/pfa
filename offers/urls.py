@@ -1,4 +1,4 @@
-from django.urls import path 
+from django.urls import path , include
 from .views import (
     OffersListView ,OfferDetailView , offer_search,
     ReviewCreateView , ReviewDetailView, ReviewUpdateView,ReviewDeleteView , #ReviewsListView
@@ -15,6 +15,8 @@ urlpatterns=[
     path('<int:offer_id>/reviews/<int:review_id>/', ReviewDetailView.as_view(), name='review_detail'),
     path('<int:offer_id>/reviews/<int:review_id>/edit/', ReviewUpdateView.as_view(), name='review_edit'),
     path('<int:offer_id>/reviews/<int:review_id>/delete/', ReviewDeleteView.as_view(), name='review_delete'),
+    # path('<int:offer_id>/bookings/',include('bookings.urls')),
+    path('',include('bookings.urls'))
 ]
 
 

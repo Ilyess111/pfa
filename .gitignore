@@ -1,2 +1,0 @@
-# Don't track the .env file (secret keys)
-.env
