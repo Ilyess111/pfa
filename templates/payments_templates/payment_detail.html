@@ -1,0 +1,9 @@
+<h2>payment Details</h2>
+<p>Offer: {{ payment.booking.offer.title }}</p>
+<p>payment date: {{ payemnt.payment_date }}</p>
+<p>card number: {{ payement.card_number }}</p>
+<p>card expiration date : {{ payment.card_expiration_date }}</p>
+<p>amount : {{ payment.amount }}</p>
+<a href="{%url  'pay_form' booking.offer_id booking.pk %}">pay my booking</a>
+<a href="{%url 'booking_update' booking.offer_id booking.pk %}">update booking</a>
+<a href="{%url 'booking_delete' booking.offer_id booking.pk %}">delete booking</a>

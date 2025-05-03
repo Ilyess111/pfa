@@ -2,6 +2,12 @@
 
 {% for booking in bookings %}
    {% if booking.user == request.user %}
-   <a href="{% url 'booking_detail' booking.offer_id booking.pk %}"><p>Offer: {{ booking.offer.title }} | Status: {{ booking.status }}</p></a> 
+   <a href="{% url 'booking_detail'  booking.pk %}"><p>Offer: {{ booking.offer.title }} | Status: {{ booking.status }}</p></a>
+   {% if booking.status == "Pending" %}
+   <a href="{%url  'pay_create'  booking.offer_id booking.pk %}">pay my booking</a>
+   <a href="{%url 'booking_update'  booking.pk %}">update booking</a>
+   <a href="{%url 'booking_delete'  booking.pk %}">delete booking</a>
    {% endif %}
+   {% endif %}
+   <hr>
 {% endfor %}

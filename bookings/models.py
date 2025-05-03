@@ -18,7 +18,6 @@ class Booking(models.Model):
 
 
 
-
     def __str__(self):
         return f"Booking by {self.user.username} - {self.offer.title} ({self.status})"
 
@@ -26,3 +25,20 @@ class Booking(models.Model):
         if self.offer and self.num_people:
             self.total_price = self.num_people * self.offer.price
         super().save(*args, **kwargs)
+        
+class Payment(models.Model):
+    booking = models.OneToOneField(Booking, on_delete=models.CASCADE)
+    # status = models.CharField([
+    #     # (<value_stored_in_db>, <human_readable_label>)
+    #     ('Pending', 'Pending'),
+    #     ('Paid', 'Paid'),
+    #     ('Expired', 'Expired'),
+    # ]    )
+    payment_date = models.DateField(auto_now_add=True)
+    card_number=models.PositiveBigIntegerField(blank=False)
+    card_expiration_date=models.DateTimeField(blank=False)
+    cvv=models.CharField(max_length=4)
+    amount=models.DecimalField(max_digits=10,decimal_places=3)
+    
+    def __str__(self):
+        return f"payment by : {self.booking.user.username} for the offer : {self.booking.offer.title} , amount : {self.amount}"
