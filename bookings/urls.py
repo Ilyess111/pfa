@@ -12,7 +12,7 @@ urlpatterns=[
     path("bookings/<int:pk>/delete/", BookingDeleteView.as_view(), name="booking_delete"),
     # payments urls
     path("<int:offer_id>/bookings/<int:pk>/payments/new/", PaymentCreateView.as_view(), name="pay_create"),
-    path("bookings/<int:pk>/payments/", PaymentListView.as_view(), name="pays_list"),
+    # path("bookings/<int:pk>/payments/", PaymentListView.as_view(), name="pays_list"),
     path("bookings/<int:pk>/payments/<int:pay_id>/detail/", PaymentDetailView.as_view(), name="pay_detail"),
 
 ]

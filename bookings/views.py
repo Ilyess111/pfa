@@ -73,10 +73,10 @@ class PaymentCreateView(CreateView):
 
         return response
 
-class PaymentListView(ListView):
-    model = Payment
-    template_name = "payments_templates/payments_list.html"
-    context_object_name = "payments"
+# class PaymentListView(ListView):
+#     model = Payment
+#     template_name = "payments_templates/payments_list.html"
+#     context_object_name = "payments"
 
     # def get_queryset(self):
     #     return Booking.objects.filter(user=self.request.user)  # Show only the user's bookings
