@@ -1,6 +1,6 @@
 from django.urls import path 
 from .views import (BookingCreateView , BookingListView , BookingDetailView , BookingUpdateView , BookingDeleteView,
-                    PaymentCreateView,PaymentListView,
+                    PaymentCreateView,PaymentListView,PaymentDetailView
                     )
 
 urlpatterns=[
@@ -13,7 +13,7 @@ urlpatterns=[
     # payments urls
     path("<int:offer_id>/bookings/<int:pk>/payments/new/", PaymentCreateView.as_view(), name="pay_create"),
     path("bookings/<int:pk>/payments/", PaymentListView.as_view(), name="pays_list"),
-    path("bookings/<int:pk>/payments/<int:pay_id>/detail/", PaymentListView.as_view(), name="pays_detail"),
+    path("bookings/<int:pk>/payments/<int:pay_id>/detail/", PaymentDetailView.as_view(), name="pay_detail"),
 
 ]
 

@@ -1,5 +1,7 @@
 {% for payment in payments %}
    {% if payment.booking.user == request.user %}
-   <a href="{% url 'payment_detail'  booking_id payment.id%}"><p>Offer: {{ booking.offer.title }} | Status: {{ booking.status }}</p></a> 
+   <a href="{% url 'pay_detail'  payment.booking.id payment.id %}">
+      <p>payment by : {{payment.booking.user.username}} for the offer : {{payment.booking.offer.titl}} , amount : {{payment.amount}}</p>
+   </a> 
    {% endif %}
 {% endfor %}

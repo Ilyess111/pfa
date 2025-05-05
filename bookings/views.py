@@ -84,7 +84,15 @@ class PaymentListView(ListView):
 class PaymentDetailView(DetailView):
     model = Payment
     template_name = "payments_templates/payment_detail.html"
-
+    
+    def get_object(self, queryset=None):
+        booking_id = self.kwargs['pk']
+        payment_id = self.kwargs['pay_id']
+        return get_object_or_404(
+            Payment,
+            id=payment_id,
+            booking_id=booking_id
+        )
 # class BookingUpdateView(UpdateView):
 #     model = Booking
 #     form_class = BookingForm #we can use the fields attribute to allow the update only for certain fields 
