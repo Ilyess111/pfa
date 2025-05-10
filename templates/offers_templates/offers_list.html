@@ -1,128 +1,136 @@
+
+
+
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="{% static '/style/liste_des_offres.css' %}" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static '/style/liste_des_offres.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <title>Liste des Offres de Voyage</title>
-  </head>
-  <body>
+</head>
+<body>
     <header>
-      <div class="logo-container">
-        <img
-          src="{% static '/images/like.png' %}"
-          alt="Airplane Logo"
-          class="logo"
-        />
-      </div>
-      <div>
-        {% if user.is_authenticated %}
-        <p>Hi {{user.username}} !</p>
-        <form action="{% url 'logout' %}" method="post">
-          {% csrf_token %}
-          <button type="submit">logout</button>
-        </form>
-        <p>wanna change passowrd ?</p>
-        <a href="{%url 'password_change'%}">
-          <button>Change Password</button>
-        </a>
-        <a href="/offers/bookings/">
-          <button type="button">check my bookings</button>
-        </a>
-        {% else %}
-        <p>Create New Account !</p>
-        <a href=" {% url 'signup' %}">
-          <button>Signup</button>
-        </a>
-        <p>already have an account ?</p>
-        <a href="{% url 'login' %}">
-          <button>Login</button>
-        </a>
-        <!-- <p>forgot your password ? </p>
+        <div class="logo-container">
+            <img src="{% static '/images/like.png' %}" alt="Airplane Logo" class="logo">
+            
+        </div>
+        <h1>Travel Agency</h1>
+        
+        
+        
+        <div class="login">
+            
+            {% if user.is_authenticated %}
+           <p>Hi {{user.username}} !</p>
+           <form action="{% url 'logout' %}" method="post">
+               {% csrf_token %}
+               <button type="submit">Logout</button>
+           </form>
+           <p>wanna change passowrd ? </p>
+           <a href="{%url 'password_change'%}" >
+               <button>Change Password</button>
+           </a>
+           <p>check your bookings?</p>
+           <a href="/offers/bookings/">
+            <button type="button">check my bookings</button>
+          </a>
+           {% else %}
+           <p>Create New Account !</p>
+           <a href=" {% url 'signup' %}">
+               <button>Signup</button>
+           </a>
+           <p>already have an account ?  </p>
+           <a href="{% url 'login' %}">
+               <button>Login</button>
+           </a>
+           
+           
+           <!-- <p>forgot your password ? </p>
             <a href="{% url 'password_reset' %}">Reset Password</a>     -->
-        {% endif %}
-      </div>
-      <h1>Recherche de Voyages</h1>
-      <a href="{% url 'offer_search' %}">
-        <button type="button">Search Offers</button>
-      </a>
+           {% endif %}
+           <p>Search for offers ?</p>
+           <a href="{% url 'offer_search' %}">
+            <button type="button" class="sae">Search Offers</button>
+            </a>
+       </div>
     </header>
 
     <section class="packge" id="packages">
-      <h1>Nos Offres</h1>
-      <div class="container">
-        {% for offer in object_list %}
-        <div class="box">
-          <img src="{% static offer.image %}" alt="{{ offer.title }}" />
-          <div class="content">
-            <a href="{% url 'offer_detail' offer.pk %}"
-              ><h4 class="hea">{{ offer.title }}</h4></a
-            >
-            <p>{{ offer.description|truncatewords:20 }}</p>
-            <p><strong>Destination:</strong> {{ offer.destination }}</p>
-            <p><strong>Durée:</strong> {{ offer.duration }} jours</p>
-            <p>
-              <strong>Prix:</strong>
-              <span class="price">{{ offer.price }} €</span>
-            </p>
-            <p>
-              <strong>Disponible du:</strong>
-              {{offer.available_from|date:"d/m/Y" }} au
-              {{offer.available_to|date:"d/m/Y" }}
-            </p>
-            <a href="{% url 'review_create' offer.pk%}">
-              <button type="button">add review</button>
-            </a>
-            <a href="{% url 'booking_create' offer.pk %}">
-              <button type="button">Book now !</button>
-            </a>
-            <div>
-              {% if offer.reviews.all %}
-              <div class="reviews-section">
-                <h3>reviews :</h3>
-                {% for review in offer.reviews.all %}
-                <div>
-                  <h5>{{review.title}}</h5>
-                  <p>author: {{review.author}}</p>
-                  <p>rating: {{review.rating}}</p>
-                  <p>{{review.created_at}}</p>
-                  <p>{{review.comment}}</p>
-                  {% if request.user == review.author %}
-                  <!-- Show buttons only for the review's owner -->
-                  <a
-                    href="{% url 'review_edit' offer_id=offer.id review_id=review.id %}"
-                    class="btn btn-primary"
-                    >Update</a
-                  ><br />
-                  <a
-                    href="{% url 'review_delete' offer_id=offer.id review_id=review.id %}"
-                    class="btn btn-danger"
-                    >Delete</a
-                  >
-                  {% endif %}
-                  <hr />
+        <h1>Nos Offres</h1>
+        <div class="container">
+            {% for offer in object_list %}
+            <div class="box">
+               <img src="{% static offer.image %}" alt="{{ offer.title }}">
+                <div class="content">
+                    <a href="{% url 'offer_detail' offer.pk %}"><h4 class="hea">{{ offer.title }}</h4></a>
+                    <p>{{ offer.description|truncatewords:20 }}</p>
+                    <p><strong>Destination:</strong> {{ offer.destination }}</p>
+                    <p><strong>Duration:</strong> {{ offer.duration }} jours</p>
+                    <p><strong>Price:</strong> <span class="price">{{ offer.price }} €</span></p>
+                    <p><strong>From:</strong> {{ offer.available_from|date:"d/m/Y" }} To {{ offer.available_to|date:"d/m/Y" }}</p>
+                    <p><strong>Available Places:</strong> {{ offer.max_people }} </p>
+                    <a href="{% url 'review_create' offer.pk%}">
+                      <button type="button">add review</button>
+                    </a>
+                    <a href="{% url 'booking_create' offer.pk %}">
+                      <button type="button">Book now !</button>
+                    </a>
+                    <div class="reviews-section">
+                        <h3>Reviews</h3>
+                        <div class="reviews-container">
+                            {% if offer.reviews.all %}
+                                {% for review in offer.reviews.all %}
+                                    
+                                    <div class="review-item">
+                                        <div class="review-header">
+                                            <h5>{{ review.title }}</h5>
+                                            
+                                        </div>
+                                        <div class="review-meta">
+                                            <span class="review-author">author: {{ review.author }}</span>
+                                         
+                                        </div>
+                                        <div class="review-meta">
+                                        
+                                            <span class="review-date">Posted on {{ review.created_at }}</span>
+                                        </div>
+                                        <p>rating: </p>
+                                        <div class="rating-stars">
+                                            {% for i in "12345" %}
+                                                {% if forloop.counter <= review.rating %}
+                                                    <i class="fas fa-star filled"></i>
+                                                {% else %}
+                                                    <i class="far fa-star"></i>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                        <p class="review-comment">{{ review.comment }}</p>
+                                        {% if request.user == review.author %}
+                                        <div class="review-actions">
+                                            <a href="{% url 'review_edit' offer_id=offer.id review_id=review.id %}" class="btn btn-primary">
+                                                <i class="fas fa-edit"></i> Edit
+                                            </a>
+                                            <a href="{% url 'review_delete' offer_id=offer.id review_id=review.id %}" class="btn btn-danger">
+                                                <i class="fas fa-trash"></i> Delete
+                                            </a>
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                <p class="no-reviews">No reviews yet.</p>
+                            {% endif %}
+                        </div>
+                    </div>
                 </div>
-                {% empty %}
-                <p>No reviews yet.</p>
-                {% endfor %}
-              </div>
-              {% else %}
-              <p>No reviews found for this offer.</p>
-              {% endif %}
             </div>
-          </div>
+            {% endfor %}
         </div>
-        {% endfor %}
-      </div>
     </section>
-  </body>
+</body>
 </html>

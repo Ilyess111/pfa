@@ -1,5 +1,130 @@
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">pay Now</button>
-</form>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Your Payment</title>
+    <link rel="stylesheet" href="{% static '/style/payment_form.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <style>
+        body{
+            background-image: url("{% static '/images/01.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            font-family: 'Montserrat', sans-serif;
+        }
+        </style>
+    <div class="background-overlay"></div>
+    
+    <section class="payment-section">
+        <div class="payment-container">
+            <div class="payment-header">
+                <div class="logo-container">
+                    <img src="{% static '/images/air.jpg' %}" alt="Company Logo" class="logo">
+                </div>
+                <h1 class="payment-title">Complete Your Payment</h1>
+                <p class="payment-subtitle">Secure transaction powered by our payment partner</p>
+            </div>
+            
+            <div class="payment-card">
+                <form method="post" class="payment-form">
+                    {% csrf_token %}
+                    
+                    <div class="form-group">
+                        <h3 class="form-section-title">
+                            <i class="fas fa-user-circle"></i> Personal Information
+                        </h3>
+                        <div class="form-grid">
+                            {% for field in form %}
+                                {% if not field.name in 'card_number,expiry_date,cvv' %}
+                                <div class="form-field">
+                                    <label for="{{ field.id_for_label }}">
+                                        {{ field.label }}
+                                        {% if field.field.required %}<span class="required">*</span>{% endif %}
+                                    </label>
+                                    {{ field }}
+                                    {% if field.help_text %}
+                                    <small class="help-text">{{ field.help_text }}</small>
+                                    {% endif %}
+                                    {% if field.errors %}
+                                    <div class="error-message">
+                                        {{ field.errors }}
+                                    </div>
+                                    {% endif %}
+                                </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <h3 class="form-section-title">
+                            <i class="far fa-credit-card"></i> Payment Details
+                        </h3>
+                        <div class="form-grid">
+                            {% for field in form %}
+                                {% if field.name in 'card_number,expiry_date,cvv' %}
+                                <div class="form-field">
+                                    <label for="{{ field.id_for_label }}">
+                                        {{ field.label }}
+                                        {% if field.field.required %}<span class="required">*</span>{% endif %}
+                                    </label>
+                                    <div class="input-with-icon">
+                                        {{ field }}
+                                        {% if field.name == 'card_number' %}
+                                        <i class="fas fa-credit-card"></i>
+                                        {% elif field.name == 'expiry_date' %}
+                                        <i class="far fa-calendar-alt"></i>
+                                        {% elif field.name == 'cvv' %}
+                                        <i class="fas fa-lock"></i>
+                                        {% endif %}
+                                    </div>
+                                    {% if field.help_text %}
+                                    <small class="help-text">{{ field.help_text }}</small>
+                                    {% endif %}
+                                    {% if field.errors %}
+                                    <div class="error-message">
+                                        {{ field.errors }}
+                                    </div>
+                                    {% endif %}
+                                </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    
+                    <div class="payment-security">
+                        <div class="security-badge">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>256-bit SSL Secure Payment</span>
+                        </div>
+                        <div class="accepted-cards">
+                            <img src="{% static '/images/visa.jpg' %}" alt="Visa">
+                            <img src="{% static '/images/mastercard.png' %}" alt="Mastercard">
+                            <img src="{% static '/images/Paybal.png' %}" alt="Paybal">
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-lock"></i> Pay ${{ booking.total_price|floatformat:2 }}
+                    </button>
+                </form>
+                
+                <div class="payment-footer">
+                    <a href="/offers/bookings/" class="back-link">
+                        <i class="fas fa-arrow-left"></i> Back to My Booking
+                    </a>
+                    <p class="support-text">
+                        Need help? <a href="#">Contact our support team</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

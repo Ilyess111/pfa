@@ -1,5 +1,46 @@
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Book Now</button>
-</form>
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static '/style/booking_form.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>Booking_create</title>
+</head>
+<body>
+
+  <style>
+    body{
+      background-image: url("{% static '/images/airport-terminal.jpg' %}");
+    }
+  </style>
+
+    <section class="login-section" id="Login">
+        <article class="container">
+            <div class="log">
+                <div class="logo-container">
+                    <img src="{% static '/images/air.jpg' %}" alt="Company Logo">
+                </div>
+                
+                <div class="form-container">
+                    <h1 class="password-reset-title">Booking Form</h1>
+                    
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit">Book Now</button>
+                    </form>
+                    
+                    <div class="footer-link">
+                        <a href="{% url 'offers_list' %}">Back offer list</a>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+</body>
+</html>
+
+  

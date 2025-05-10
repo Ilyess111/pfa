@@ -1,12 +1,100 @@
-<h2>Booking Details</h2>
-<p>Offer: {{ booking.offer.title }}</p>
-<p>People: {{ booking.num_people }}</p>
-<p>Total Price: {{ booking.total_price }}</p>
-<p>Status: {{ booking.status }}</p>
-{% if booking.status == "Pending" %}
-<a href="{%url  'pay_create' booking.offer_id booking.pk %}">pay my booking</a>
-<a href="{%url 'booking_update'  booking.pk %}">update booking</a>
-<a href="{%url 'booking_delete'  booking.pk %}">delete booking</a>
-{% else %}
-<a href="{% url 'pay_detail' pk=booking.id pay_id=booking.payment.id %}">check payment details</a>
-{% endif %}
+
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Details</title>
+    <link rel="stylesheet" href="{% static '/style/booking_detail.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+</head>
+<body>
+    <style>
+        body{
+            background-image: url("{% static '/images/01.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            font-family: 'Montserrat', sans-serif;
+        }
+        </style>
+        
+    <div class="background-overlay"></div>
+    
+    <section class="booking-section">
+        <div class="booking-container">
+            <div class="booking-header">
+                <div class="logo-container">
+                    <img src="{% static '/images/air.jpg' %}" alt="Company Logo" class="logo">
+                </div>
+                <h1 class="booking-title">Booking Details</h1>
+            </div>
+            
+            <div class="booking-card">
+                <div class="booking-info">
+                    <div class="info-item">
+                        <i class="fas fa-tag"></i>
+                        <div>
+                            <span class="info-label">Offer</span>
+                            <span class="info-value">{{ booking.offer.title }}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <i class="fas fa-users"></i>
+                        <div>
+                            <span class="info-label">People</span>
+                            <span class="info-value">{{ booking.num_people }}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <i class="fas fa-money-bill-wave"></i>
+                        <div>
+                            <span class="info-label">Total Price</span>
+                            <span class="info-value">${{ booking.total_price }}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <i class="fas fa-info-circle"></i>
+                        <div>
+                            <span class="info-label">Status</span>
+                            <span class="status-badge status-{{ booking.status|lower }}">{{ booking.status }}</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="booking-actions">
+                    {% if booking.status == "Pending" %}
+                    <a href="{% url 'pay_create' booking.offer_id booking.pk %}" class="action-btn pay-btn">
+                        <i class="fas fa-credit-card"></i> Pay Now
+                    </a>
+                    <a href="{% url 'booking_update' booking.pk %}" class="action-btn update-btn">
+                        <i class="fas fa-edit"></i> Update
+                    </a>
+                    <a href="{% url 'booking_delete' booking.pk %}" class="action-btn delete-btn">
+                        <i class="fas fa-trash-alt"></i> {% if booking.status == "Pending" %}Delete Booking{% else %}Delete{% endif %}
+                    </a>
+                    {% else %}
+                    <a href="{% url 'pay_detail' pk=booking.id pay_id=booking.payment.id %}"   class="action-btn pay-btn">check payment details</a>
+                    {% endif %}
+                    
+                    <a href="/offers/bookings/" class="action-btn back-btn">
+                        <i class="fas fa-arrow-left"></i> Back to my bookings
+                    </a>
+                </div>
+            </div>
+            
+            <div class="booking-footer">
+                <p>Need help? <a href="#">Contact support</a></p>
+               
+            </div>
+        </div>
+    </section>
+</body>
+</html>

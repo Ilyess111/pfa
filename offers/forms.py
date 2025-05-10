@@ -1,4 +1,3 @@
-
 from django import forms
 from django.forms import DateInput
 
@@ -7,6 +6,7 @@ class OfferSearchForm(forms.Form):
     destination = forms.CharField(required=False)
     min_duration = forms.IntegerField(required=False, label="Minimum duration (days)")
     max_duration = forms.IntegerField(required=False, label="Maximum duration (days)")
-    max_price = forms.DecimalField(required=False, decimal_places=2)
+    min_price = forms.DecimalField(required=False, decimal_places=2, label="Minimum price")  # Added
+    max_price = forms.DecimalField(required=False, decimal_places=2, label="Maximum price")
     available_from = forms.DateField(required=False, widget=DateInput(attrs={'type': 'date'}))
     available_to = forms.DateField(required=False, widget=DateInput(attrs={'type': 'date'}))

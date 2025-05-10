@@ -29,41 +29,45 @@
                 <h1 class="main-title">Find Your Perfect Getaway <i class="fas fa-search"></i></h1>
                 <p class="subtitle">Discover amazing travel deals tailored just for you</p>
                 
-                <!-- Modifiez la partie search-form dans votre HTML -->
-            <form method="get" class="search-form">
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label for="id_title"><i class="fas fa-heading"></i> Title</label>
-                        <input type="text" id="id_title" name="title" placeholder="Enter offer title">
-                    </div>
-                    <div class="form-group">
-                        <label for="id_destination"><i class="fas fa-map-marker-alt"></i> Destination</label>
-                        {{ form.destination }}
-                    </div>
-                    <div class="form-group">
-                        <label><i class="fas fa-calendar-alt"></i> Duration (days)</label>
-                        <div class="duration-range">
-                            <input type="number" id="id_duration_min" name="duration_min" placeholder="Min" min="1">
-                            <span class="range-separator">to</span>
-                            <input type="number" id="id_duration_max" name="duration_max" placeholder="Max" min="1">
+                <form method="get" class="search-form">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="id_title"><i class="fas fa-heading"></i> Title</label>
+                            {{ form.title }}
+                        </div>
+                        <div class="form-group">
+                            <label for="id_destination"><i class="fas fa-map-marker-alt"></i> Destination</label>
+                            {{ form.destination }}
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-calendar-alt"></i> Duration (days)</label>
+                            <div class="duration-range">
+                                {{ form.min_duration }}
+                                <span class="range-separator">to</span>
+                                {{ form.max_duration }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-dollar-sign"></i> Price Range</label>
+                            <div class="price-range">
+                                {{ form.min_price }}
+                                <span class="range-separator">to</span>
+                                {{ form.max_price }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="id_available_from"><i class="fas fa-calendar-day"></i> Available From</label>
+                            {{ form.available_from }}
+                        </div>
+                        <div class="form-group">
+                            <label for="id_available_to"><i class="fas fa-calendar-day"></i> Available To</label>
+                            {{ form.available_to }}
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="id_price_max"><i class="fas fa-dollar-sign"></i> Max Price</label>
-                        <input type="number" id="id_price_max" name="price_max" placeholder="Maximum price">
-                    </div>
-                    <div class="form-group">
-                        <label for="id_available_from"><i class="fas fa-calendar-day"></i> Available From</label>
-                        <input type="date" id="id_available_from" name="available_from">
-                    </div>
-                    <div class="form-group">
-                        <label for="id_available_to"><i class="fas fa-calendar-day"></i> Available To</label>
-                        <input type="date" id="id_available_to" name="available_to">
-                    </div>
-                </div>
-                <button type="submit" class="btn-primary">
-                    <i class="fas fa-search"></i> Search Offers</button>
-            </form>
+                    <button type="submit" class="btn-primary">
+                        <i class="fas fa-search"></i> Search Offers
+                    </button>
+                </form>
                         </div>
                     </div>
                 </div>
@@ -103,7 +107,8 @@
                                 <i class="fas fa-calendar-check"></i> {{ offer.available_from|date:"M d" }} - {{ offer.available_to|date:"M d, Y" }}
                             </div>
                             <div class="offer-actions">
-                                <button class="btn-book">Book Now <i class="fas fa-arrow-right"></i></button>
+                                <a href="{% url 'booking_create' offer.pk %}"><button class="btn-book">Book Now <i class="fas fa-arrow-right"></i></button></a>
+
                             </div>
                         </div>
                     </div>

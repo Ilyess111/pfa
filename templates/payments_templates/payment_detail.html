@@ -1,7 +1,90 @@
-<h2>payment Details</h2>
-<p>Offer: {{ payment.booking.offer.title }}</p>
-<p>payment date: {{ payemnt.payment_date }}</p>
-<p>card number: {{ payement.card_number }}</p>
-<p>card expiration date : {{ payment.card_expiration_date }}</p>
-<p>amount : {{ payment.amount }}</p>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Details</title>
+    <link rel="stylesheet" href="{% static '/style/payment_detail.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    
+</head>
+<body>
 
+    <style>
+        body{
+            background-image: url("{% static '/images/01.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            font-family: 'Montserrat', sans-serif;
+        }
+        </style>
+    <div class="background-overlay"></div>
+    <div class="floating-particles"></div>
+    
+    <section class="booking-section">
+        <div class="booking-container">
+            <div class="booking-header">
+                <div class="logo-container">
+                    <img src="{% static '/images/air.jpg' %}" alt="Company Logo" class="logo">
+                </div>
+                <h1 class="booking-title">Booking Details</h1>
+            </div>
+            
+            <div class="booking-card">
+                <h2>Payment Details</h2>
+                
+                <div class="payment-details">
+                    <div class="detail-item">
+                        <i class="fas fa-tag"></i>
+                        <span class="detail-label">Offer</span>
+                        <span class="detail-value">{{ payment.booking.offer.title }}</span>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <i class="far fa-calendar-alt"></i>
+                        <span class="detail-label">Payment Date</span>
+                        <span class="detail-value">{{ payment.payment_date }}</span>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <i class="far fa-credit-card"></i>
+                        <span class="detail-label">Card Number</span>
+                        <span class="detail-value">•••• •••• •••• {{ payment.card_number|slice:"-4:" }}</span>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <i class="far fa-clock"></i>
+                        <span class="detail-label">Card Expiration</span>
+                        <span class="detail-value">{{ payment.card_expiration_date }}</span>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <i class="fas fa-money-bill-wave"></i>
+                        <span class="detail-label">Amount</span>
+                        <span class="detail-value amount">${{ payment.amount }}</span>
+                    </div>
+                </div>
+                
+                <div class="payment-status status-confirmed">
+                    <i class="fas fa-check-circle"></i> Payment Confirmed
+                </div>
+                <div>
+                    <a href="/offers/bookings/" class="action-btn back-btn">
+                        <i class="fas fa-arrow-left"></i> Back to my bookings
+                    </a>
+                </div>
+            </div>
+            
+            <div class="booking-footer">
+                
+                <p>Need help? <a href="#">Contact support</a></p>
+                
+            </div>
+        </div>
+    </section>
+</body>
+</html>

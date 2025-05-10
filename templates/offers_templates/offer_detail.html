@@ -1,45 +1,56 @@
-
-
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static '/style/liste_des_offre_detail.css' %}">
+    <link rel="stylesheet" href="{% static '/style/offer_detail.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <title>Offer Details</title>
 </head>
 <body>
 
     <style>
-        body{
-            background-image: url("{% static '/images/background2.png' %}");
-        }
+    body{
+        background-image: url("{% static '/images/01.jpg' %}");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        font-family: 'Montserrat', sans-serif;
+    }
     </style>
 
     <section class="login-section" id="Login">
         <article class="container">
             <div class="log">
                 <div class="logo-container">
-                    <img src="{% static '/images/air.jpg' %}" alt="Company Logo">
+                    <img src="{% static '/images/air.jpg' %}" alt="Company Logo" class="floating">
                 </div>
                 
                 <div class="form-container">
-                    <h1 class="password-reset-title">Offer Details</h1>
+                    <h1 class="password-reset-title animate__animated animate__fadeInDown">Offer Details</h1>
                     
                     <form class="login-form" action="" method="post">
                         {% csrf_token %}
-                        <h3>{{offer.title}}</h3>
                         
-                        <img src="{% static offer.image %}" alt="Offer Image">
-                        
-                        <p>{{offer.description}}</p>
-                        <div>
-
-
+                        <!-- Badge pour offres spéciales -->
+                        {% if offer.special_offer %}
+                        <div class="special-offer-badge animate__animated animate__pulse animate__infinite">
+                            SPECIAL OFFER!
                         </div>
+                        {% endif %}
+                        
+                        <h3 class="animate__animated animate__fadeIn">{{offer.title}}</h3>
+                        
+                        <div class="image-container">
+                            <img src="{% static offer.image %}" alt="Offer Image" class="animate__animated animate__fadeIn">
+                        </div>
+                        
+                        <p class="animate__animated animate__fadeIn">{{offer.description}}</p>
+                        
+                        
                         
                         <div class="offer-detail-grid">
                             <div class="offer-detail-item">
@@ -62,20 +73,42 @@
                             </div>
                         </div>
                         
-                        <div>
-                            <h3>reviews : </h3>
-                            {% for review in offer.reviews.all %} 
-                            <div>
-                                <p>author: {{review.author}}</p>
-                                <p>rating: {{review.rating}}</p>
-                                <p>{{review.created_at}}</p>
-                                <p>{{review.comment}}</p>
-                                <hr>
+                        <div class="reviews-section">
+                            <h3>Customer Reviews</h3>
+                            <div class="reviews-container">
+                                {% for review in offer.reviews.all %} 
+                                <div class="review-card">
+                                    <div class="review-header">
+                                        <div class="review-author">
+                                            <i class="fas fa-user-circle"></i>
+                                            <span>{{review.author}}</span>
+                                        </div>
+                                        <div class="review-meta">
+                                            <span class="review-date">{{review.created_at|date:"M d, Y"}}</span>
+                                            <div class="rating-stars">
+                                                {% for i in "12345" %}
+                                                    {% if forloop.counter <= review.rating %}
+                                                        <i class="fas fa-star filled"></i>
+                                                    {% else %}
+                                                        <i class="far fa-star"></i>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="review-body">
+                                        <p class="review-comment">{{review.comment}}</p>
+                                    </div>
+                                </div>
+                                {% empty %}
+                                <div class="no-reviews">
+                                    <p>No reviews yet. Be the first to review!</p>
+                                </div>
+                                {% endfor %}
                             </div>
-                            {%endfor%}
                         </div>
                         <div class="footer-link">
-                            <a href="{% url 'offers_list' %}">Back offer list</a>
+                            <a href="{% url 'offers_list' %}">Back to offer list <i class="fas fa-chevron-right"></i></a>
                         </div>
                     </form>
                 </div>

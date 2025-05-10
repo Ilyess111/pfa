@@ -1,13 +1,63 @@
-<!-- list of bookings which the current user have made  -->
+{% load static %}
 
-{% for booking in bookings %}
-   {% if booking.user == request.user %}
-   <a href="{% url 'booking_detail'  booking.pk %}"><p>Offer: {{ booking.offer.title }} | Status: {{ booking.status }}</p></a>
-   {% if booking.status == "Pending" %}
-   <a href="{%url  'pay_create'  booking.offer_id booking.pk %}">pay my booking</a>
-   <a href="{%url 'booking_update'  booking.pk %}">update booking</a>
-   <a href="{%url 'booking_delete'  booking.pk %}">delete booking</a>
-   {% endif %}
-   {% endif %}
-   <hr>
-{% endfor %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Bookings</title>
+    <link rel="stylesheet" href="{% static 'style/bookings_list.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <a href="{% url 'offers_list' %}" class="back-button">
+            <i class="fas fa-arrow-left"></i> Back to Offers
+        </a>
+        <h1><i class="fas fa-calendar-alt"></i> My Bookings</h1>
+        
+        {% if not bookings %}
+            <div class="no-bookings">
+                <i class="fas fa-calendar-times"></i>
+                <h2>No Bookings Found</h2>
+                <p>You haven't made any bookings yet. Start exploring our offers!</p>
+            </div>
+        {% endif %}
+        
+        {% for booking in bookings %}
+            {% if booking.user == request.user %}
+                <div class="booking-card">
+                    <div class="booking-header">
+                        <a href="{% url 'booking_detail' booking.pk %}" class="booking-title">
+                            <i class="fas fa-hotel"></i> {{ booking.offer.title }}
+                        </a>
+                        <span class="booking-status status-{{ booking.status|lower }}">
+                            {{ booking.status }}
+                        </span>
+                    </div>
+                    
+                  
+                    <div class="booking-actions">
+                        <a href="{% url 'booking_detail' booking.pk %}" class="action-btn detail-btn">
+                            <i class="fas fa-info-circle"></i> Details
+                        </a>
+                        
+                        {% if booking.status == "Pending" %}
+                            <a href="{% url 'pay_create' booking.offer_id booking.pk %}" class="action-btn pay-btn">
+                                <i class="fas fa-credit-card"></i> Pay Now
+                            </a>
+                            <a href="{% url 'booking_update' booking.pk %}" class="action-btn update-btn">
+                                <i class="fas fa-edit"></i> Update
+                            </a>
+                            <a href="{% url 'booking_delete' booking.pk %}" class="action-btn delete-btn">
+                                <i class="fas fa-trash-alt"></i> Delete Booking
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</body>
+</html>

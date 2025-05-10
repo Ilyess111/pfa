@@ -1,6 +1,6 @@
 from django.urls import path 
 from .views import (BookingCreateView , BookingListView , BookingDetailView , BookingUpdateView , BookingDeleteView,
-                    PaymentCreateView,PaymentListView,PaymentDetailView
+                    PaymentCreateView,PaymentDetailView
                     )
 
 urlpatterns=[

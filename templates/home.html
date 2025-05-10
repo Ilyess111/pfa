@@ -1,4 +1,95 @@
-{% extends 'base.html' %}
-{% block content %}
-<h1>home page </h1>
-{% endblock content %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="{% static 'style/Home.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="{% static '/images/air.jpg' %}" alt="Company Logo" class="logo">
+            <h1>Travel Agency</h1>
+        </div>
+        <nav class="navbar">
+          
+            <ul>
+                <li><a href="{% url 'home' %}" class="active">Home</a></li>
+                <li><a href="{% url 'offers_list' %}">Offers</a></li>
+                <li><a href="{% url 'login' %}">Log In</a></li>
+                <li><a href="{% url 'signup' %}">Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+   <section class="hero">
+    <div class="slider">
+        <div class="slides">
+            <img src="{% static '/images/ocean.jpg' %}" class="slide active" alt="Ocean">
+            <img src="{% static '/images/nature.jpg' %}" class="slide" alt="Nature">
+            <img src="{% static '/images/palace.jpg' %}" class="slide" alt="Palace">
+            <img src="{% static '/images/women.jpg' %}" class="slide" alt="Women">
+            <img src="{% static '/images/sunset-japan.jpg' %}" class="slide" alt="mountain-japan">
+        </div>
+        
+     
+        <div class="hero-content">
+            <h1 class="hero-title">Exploring The World</h1>
+            <div class="hero-divider"></div>
+            <p class="hero-subtitle">
+                ADVENTURE IS WORTHWHILEDiscover New Places With Us<br>Book Your Next Trip Today and Experience the World Like Never Before.
+            </p>
+            <div class="hero-btn-container">
+                <a href="{% url 'offers_list' %}" class="btn">View Offers</a>
+            </div>
+        </div>
+        
+        <div class="dots">
+            <span class="dot active" data-index="0"></span>
+            <span class="dot" data-index="1"></span>
+            <span class="dot" data-index="2"></span>
+            <span class="dot" data-index="3"></span>
+            <span class="dot" data-index="4"></span>
+        </div>
+    </div>
+</section>
+
+   
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Trave Agency</h4>
+                    <p>Making your travel dreams a reality since 2010. We specialize in finding you the perfect vacation at the perfect price.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Us</h4>
+                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                    <p><i class="fas fa-envelope"></i> info@wanderlust.com</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </footer>
+    <script src="{% static '/javascript/home.js' %}"></script>
+</body>
+</html>
