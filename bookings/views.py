@@ -104,7 +104,7 @@ class PaymentCreateView(CreateView):
         #     form.add_error('card_number', "Invalid card number")
         #     return self.form_invalid(form)
         
-        if len(cvv)!=3:
+        if len(cvv)!=4:
             form.add_error('cvv', "Invalid cvv")
             return self.form_invalid(form)
         

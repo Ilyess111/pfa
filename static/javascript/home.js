@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const slides = document.querySelectorAll('.slide');
     const dots = document.querySelectorAll('.dot');
     let currentSlide = 0;
-    const slideInterval = 3000; // 5 seconds
+    const slideInterval = 7000; // 5 seconds
     
     function showSlide(index) {
         slides.forEach(slide => slide.classList.remove('active'));

@@ -140,3 +140,17 @@ button[type="submit"]:hover {
     color: #00b8f4;
     text-decoration: underline;
 }
+
+.date-select-group {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.date-select-group select {
+    padding: 6px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}

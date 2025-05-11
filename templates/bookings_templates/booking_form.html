@@ -29,9 +29,39 @@
                     
                     <form method="post">
                         {% csrf_token %}
-                        {{ form.as_p }}
+                    
+                        <div class="form-field">
+                            <label for="{{ form.num_people.id_for_label }}">Number of People</label>
+                            {{ form.num_people }}
+                            {% if form.num_people.errors %}
+                                <div class="error-message">{{ form.num_people.errors }}</div>
+                            {% endif %}
+                        </div>
+                    
+                        <div class="form-field">
+                            <label for="{{ form.start_date.id_for_label }}">Start Date</label>
+                            <div class="date-select-group">
+                                {{ form.start_date }}
+                            </div>
+                            {% if form.start_date.errors %}
+                                <div class="error-message">{{ form.start_date.errors }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="form-field">
+                            <label for="{{ form.end_date.id_for_label }}">End Date</label>
+                            <div class="date-select-group">
+                                {{ form.end_date }}
+                            </div>
+                            {% if form.end_date.errors %}
+                                <div class="error-message">{{ form.end_date.errors }}</div>
+                            {% endif %}
+                        </div>
+                        
+                    
                         <button type="submit">Book Now</button>
                     </form>
+                    
                     
                     <div class="footer-link">
                         <a href="{% url 'offers_list' %}">Back offer list</a>

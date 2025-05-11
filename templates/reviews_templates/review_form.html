@@ -8,35 +8,39 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>Trip Review</title>
-   
-    </head>
-    <body>
-        <div class="review-header">
-            <img src="{% static '/images/air.jpg' %}" alt="Company Logo">
-        </div>
-        
-        <h1 class="password-reset-title">Trip Reviews</h1>
-        
-        <div class="rating-summary">
-            <div class="stars">★★★★★</div>
-            <div class="rating-text">4.5 stars</div>
-            <div class="rating-text">based on 2 reviews</div>
-        </div>
-        
+</head>
+<body>
+    <div class="review-header">
+        <img src="{% static '/images/air.jpg' %}" alt="Company Logo">
+    </div>
+
+    <!-- Back Button -->
+    <div class="back-button">
+        <a href="{% url 'offers_list' %}" class="btn-back">
+            <i class="fas fa-arrow-left"></i> Back to Offers
+        </a>
+    </div>
+
+    <h1 class="password-reset-title">Trip Reviews</h1>
     
-        
-        <h2>Add Your Review</h2>
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Submit Review</button>
-        </form>
+    <div class="rating-summary">
+        <div class="stars">★★★★★</div>
+        <div class="rating-text">4.5 stars</div>
+        <div class="rating-text">based on 2 reviews</div>
+    </div>
+    
+    <h2>Add Your Review</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit Review</button>
+    </form>
 
+    <div class="floating-elements">
+        <div class="circle circle-1"></div>
+        <div class="circle circle-2"></div>
+        <div class="circle circle-3"></div>
+    </div>
 
-        <div class="floating-elements">
-            <div class="circle circle-1"></div>
-            <div class="circle circle-2"></div>
-            <div class="circle circle-3"></div>
-        </div>
-    </body>
-    </html>
+</body>
+</html>

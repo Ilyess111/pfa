@@ -37,7 +37,7 @@ class Payment(models.Model):
     payment_date = models.DateField(auto_now_add=True)
     card_number=models.PositiveBigIntegerField(blank=False)
     card_expiration_date=models.DateTimeField(blank=False)
-    cvv=models.CharField(max_length=4)
+    cvv=models.CharField(max_length=4,help_text="4 digits on the back of your card")
     amount=models.DecimalField(max_digits=10,decimal_places=3)
     
     def __str__(self):

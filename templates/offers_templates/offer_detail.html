@@ -35,7 +35,6 @@
                     <form class="login-form" action="" method="post">
                         {% csrf_token %}
                         
-                        <!-- Badge pour offres spéciales -->
                         {% if offer.special_offer %}
                         <div class="special-offer-badge animate__animated animate__pulse animate__infinite">
                             SPECIAL OFFER!

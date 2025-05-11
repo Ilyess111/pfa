@@ -51,6 +51,77 @@ header {
     transform: scale(1.05);
 }
 
+
+
+/* Back to Home Button */
+
+
+.back-home-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0.8rem 1.5rem;
+    background: var(--primary-color);
+    color: white;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.back-home-btn:hover {
+    background: var(--secondary-color);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.back-home-btn i {
+    font-size: 0.9rem;
+}
+
+/*Search offers*/
+
+/* Add this to your CSS */
+.back-shearch-container {
+    text-align: right;
+   
+    margin-left: 50rem; /* Adjust this value as needed */
+}
+
+.back-shearch-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0.8rem 1.5rem;
+    background: var(--primary-color);
+    color: white;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.back-shearch-btn:hover {
+    background: var(--secondary-color);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.back-shearch-btn i {
+    font-size: 0.9rem;
+}
+
+/* Update the container for both buttons */
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5rem;
+    width: 100%;
+}
+
+
 .logo {
     height: 120px;
     width: 120px;

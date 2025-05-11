@@ -25,28 +25,24 @@ def offer_search(request):
     if form.is_valid():
         data = form.cleaned_data
         
-        # Text-based filters
         if data.get('title'):
             offers = offers.filter(title__icontains=data['title'])
         
         if data.get('destination'):
             offers = offers.filter(destination__icontains=data['destination'])
         
-        # Duration filters
         if data.get('min_duration'):
             offers = offers.filter(duration__gte=data['min_duration'])
         
         if data.get('max_duration'):
             offers = offers.filter(duration__lte=data['max_duration'])
         
-        # Price filters (now both min and max)
         if data.get('min_price'):
             offers = offers.filter(price__gte=data['min_price'])
         
         if data.get('max_price'):
             offers = offers.filter(price__lte=data['max_price'])
         
-        # Date availability filters
         if data.get('available_from') and data.get('available_to'):
             offers = offers.filter(
                 available_from__lte=data['available_to'],
@@ -57,7 +53,9 @@ def offer_search(request):
                 offers = offers.filter(available_to__gte=data['available_from'])
             if data.get('available_to'):
                 offers = offers.filter(available_from__lte=data['available_to'])
-    
+
+
+
     context = {
         'form': form,
         'offers': offers,

@@ -1,4 +1,3 @@
-
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -21,7 +20,6 @@
                 </div>
                 <nav class="nav-links">
                     <a href="{% url 'offers_list' %}" class="nav-link">liste des offres</a>
-                    
                 </nav>
             </header>
             
@@ -35,26 +33,30 @@
                             <label for="id_title"><i class="fas fa-heading"></i> Title</label>
                             {{ form.title }}
                         </div>
+                
                         <div class="form-group">
                             <label for="id_destination"><i class="fas fa-map-marker-alt"></i> Destination</label>
                             {{ form.destination }}
                         </div>
+                
                         <div class="form-group">
-                            <label><i class="fas fa-calendar-alt"></i> Duration (days)</label>
-                            <div class="duration-range">
-                                {{ form.min_duration }}
-                                <span class="range-separator">to</span>
-                                {{ form.max_duration }}
-                            </div>
+                            <label><i class="fas fa-calendar-alt"></i> Min Duration (days)</label>
+                            {{ form.min_duration }}
                         </div>
                         <div class="form-group">
-                            <label><i class="fas fa-dollar-sign"></i> Price Range</label>
-                            <div class="price-range">
-                                {{ form.min_price }}
-                                <span class="range-separator">to</span>
-                                {{ form.max_price }}
-                            </div>
+                            <label><i class="fas fa-calendar-alt"></i> Max Duration (days)</label>
+                            {{ form.max_duration }}
                         </div>
+                
+                        <div class="form-group">
+                            <label><i class="fas fa-dollar-sign"></i> Min Price</label>
+                            {{ form.min_price }}
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-dollar-sign"></i> Max Price</label>
+                            {{ form.max_price }}
+                        </div>
+                
                         <div class="form-group">
                             <label for="id_available_from"><i class="fas fa-calendar-day"></i> Available From</label>
                             {{ form.available_from }}
@@ -64,35 +66,38 @@
                             {{ form.available_to }}
                         </div>
                     </div>
+                
                     <button type="submit" class="btn-primary">
                         <i class="fas fa-search"></i> Search Offers
                     </button>
                 </form>
-                        </div>
-                    </div>
-                </div>
+                
+            </div>
+        </div>
+    </div>
 
     <div class="results-section">
         <div class="container">
             {% if offers %}
+                
+
                 <div class="results-header">
                     <h2 class="results-title">We Found {{ offers|length }} Amazing Offers <i class="fas fa-globe-americas"></i></h2>
                     <div class="sort-options">
                         <span>Sort by:</span>
                         <select class="sort-select">
-                            <option>Price (Low to High)</option>
-                            <option>Price (High to Low)</option>
-                            <option>Duration</option>
-                            <option>Destination</option>
-                        </select>
+    <option value="price-low">Price (Low to High)</option>
+    <option value="price-high">Price (High to Low)</option>
+    <option value="duration">Duration</option>
+    <option value="destination">Destination</option>
+</select>
                     </div>
                 </div>
                 
                 <div class="offers-grid">
                     {% for offer in offers %}
-                    <div class="offer-card">
+                    <div class="offer-card" data-price="{{ offer.price }}" data-duration="{{ offer.duration }}">
                         <div class="offer-image-container">
-                            
                             <div class="price-container">
                                 <span class="price-amount">${{ offer.price }}</span>
                             </div>
@@ -107,28 +112,26 @@
                                 <i class="fas fa-calendar-check"></i> {{ offer.available_from|date:"M d" }} - {{ offer.available_to|date:"M d, Y" }}
                             </div>
                             <div class="offer-actions">
-                                <a href="{% url 'booking_create' offer.pk %}"><button class="btn-book">Book Now <i class="fas fa-arrow-right"></i></button></a>
-
+                                <a href="{% url 'booking_create' offer.pk %}" ><button class="btn-book">Book Now <i class="fas fa-arrow-right"></i></button></a>
                             </div>
                         </div>
+                        
                     </div>
-                    
                     {% endfor %}
                 </div>
-                
-                <div class="pagination">
-                    <button class="page-btn active">1</button>
-                    <button class="page-btn">2</button>
-                    <button class="page-btn">3</button>
-                    <button class="page-btn next">Next <i class="fas fa-chevron-right"></i></button>
-                </div>
+
+                <div class="pagination"></div>
+
+
+
+
             {% else %}
                 {% if request.GET %}
                 <div class="no-results">
                     <img src="{% static '/images/no-results-found.jpg' %}" alt="No results found" class="no-results-img">
                     <h3>No offers match your search criteria</h3>
                     <p>Try adjusting your filters or search for a different destination</p>
-                    <button class="btn-primary">Show All Offers</button>
+                    <a href="{% url 'offers_list' %}" class="btn-primary">Show All Offers</a>
                 </div>
                 {% endif %}
             {% endif %}
@@ -142,15 +145,7 @@
                     <h4>Trave Agency</h4>
                     <p>Making your travel dreams a reality since 2010. We specialize in finding you the perfect vacation at the perfect price.</p>
                 </div>
-                <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Careers</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                    </ul>
-                </div>
+                
                 <div class="footer-section">
                     <h4>Contact Us</h4>
                     <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
@@ -162,11 +157,10 @@
                     </div>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2023 Wanderlust Travel. All rights reserved.</p>
-            </div>
         </div>
     </footer>
     {% endblock %}
+    <script src="{% static 'javascript/offer_list.js' %}"></script>
+
 </body>
 </html>
