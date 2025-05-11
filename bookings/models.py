@@ -28,12 +28,7 @@ class Booking(models.Model):
         
 class Payment(models.Model):
     booking = models.OneToOneField(Booking, on_delete=models.CASCADE)
-    # status = models.CharField([
-    #     # (<value_stored_in_db>, <human_readable_label>)
-    #     ('Pending', 'Pending'),
-    #     ('Paid', 'Paid'),
-    #     ('Expired', 'Expired'),
-    # ]    )
+ 
     payment_date = models.DateField(auto_now_add=True)
     card_number=models.PositiveBigIntegerField(blank=False)
     card_expiration_date=models.DateTimeField(blank=False)

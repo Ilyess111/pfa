@@ -10,10 +10,7 @@ class BookingForm(forms.ModelForm):
             'start_date': forms.SelectDateWidget(years=range(2024, 2035)),
             'end_date': forms.SelectDateWidget(years=range(2024, 2035)),
         }
-# class PaymentForm(forms.ModelForm):
-#     class Meta:
-#         model = Payment
-#         fields = ['card_number', 'card_expiration_date', 'cvv']
+
 
 class PaymentForm(forms.ModelForm):
     class Meta:

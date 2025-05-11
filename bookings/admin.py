@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import Booking , Payment 
 
-class BookingAdmin(admin.ModelAdmin): # new
+class BookingAdmin(admin.ModelAdmin): 
      list_display = ['id', '__str__'] 
      
 class PaymentAdmin(admin.ModelAdmin):
